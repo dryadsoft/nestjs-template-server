@@ -15,4 +15,7 @@ $ nest new project-name
 $ npm i @nestjs/graphql @nestjs/apollo graphql apollo-server-express
 ```
 
+1. Graphql 설정
+2. Resolver,Query 생성
+
 [] typeOrm
