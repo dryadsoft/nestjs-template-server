@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CreateTestDto } from './dtos/create-test.dto';
+import { CreateTestDto, CreateTestDto2 } from './dtos/create-test.dto';
 import { Test } from './entities/test.entity';
 
 @Resolver((of) => Test)
@@ -21,6 +21,11 @@ export class TestResolver {
 
   @Mutation((returns) => Boolean)
   createTest2(@Args('input') createTestDto: CreateTestDto): boolean {
+    return true;
+  }
+
+  @Mutation((returns) => Boolean)
+  createTest3(@Args() createTestDto2: CreateTestDto2): boolean {
     return true;
   }
 }
