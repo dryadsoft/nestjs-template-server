@@ -1,5 +1,9 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CreateTestDto, CreateTestDto2 } from './dtos/create-test.dto';
+import {
+  CreateTestDto,
+  CreateTestDto2,
+  CreateTestDto4,
+} from './dtos/create-test.dto';
 import { Test } from './entities/test.entity';
 import { TestService } from './test.service';
 
@@ -34,5 +38,9 @@ export class TestResolver {
   @Query((returns) => [Test])
   getAll(): Promise<Test[]> {
     return this.testService.getAll();
+  }
+  @Mutation((returns) => Test)
+  cretaeTest4(@Args('input') createTestDto4: CreateTestDto4): Promise<Test> {
+    return this.testService.createTest4(createTestDto4);
   }
 }

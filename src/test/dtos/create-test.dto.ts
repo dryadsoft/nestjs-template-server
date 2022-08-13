@@ -1,5 +1,6 @@
-import { ArgsType, Field, InputType } from '@nestjs/graphql';
-import { IsBoolean, isBoolean, IsString, Length } from 'class-validator';
+import { ArgsType, Field, InputType, OmitType } from '@nestjs/graphql';
+import { IsBoolean, IsString, Length } from 'class-validator';
+import { Test } from '../entities/test.entity';
 
 @InputType()
 export class CreateTestDto {
@@ -9,8 +10,8 @@ export class CreateTestDto {
   age: number;
   @Field((type) => String)
   address: string;
-  @Field((type) => Boolean)
-  sex: boolean;
+  @Field((type) => String)
+  sex: string;
 }
 
 @ArgsType()
@@ -24,7 +25,10 @@ export class CreateTestDto2 {
   age: number;
   @Field((type) => String)
   address: string;
-  @Field((type) => Boolean)
-  @IsBoolean()
-  sex: boolean;
+  @Field((type) => String)
+  @IsString()
+  sex: string;
 }
+
+@InputType()
+export class CreateTestDto4 extends OmitType(Test, ['id']) {}
