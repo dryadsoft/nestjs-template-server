@@ -25,7 +25,7 @@ export class UsersService {
       if (user) {
         return {
           ok: false,
-          error: '사용자 이메일이 이미 존재합니다. 계정생성을 할 수 없습니다.',
+          error: '사용자 이메일이 이미 존재합니다. 계정을 생성할 수 없습니다.',
         };
       }
       const newUser = this.users.create({
@@ -40,7 +40,7 @@ export class UsersService {
     } catch (error) {
       return {
         ok: false,
-        error,
+        error: '신규계정을 생성할 수 없습니다.',
       };
     }
   }
