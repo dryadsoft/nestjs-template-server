@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TestModule } from './test/test.module';
 import { Test } from './test/entities/test.entity';
 import { UsersModule } from './users/users.module';
+import { User } from './users/entities/user.entity';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -32,7 +34,7 @@ import { UsersModule } from './users/users.module';
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: process.env.NODE_ENV !== 'prod',
-      entities: [Test],
+      entities: [Test, User],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -40,6 +42,7 @@ import { UsersModule } from './users/users.module';
     }),
     TestModule,
     UsersModule,
+    CommonModule,
   ],
   controllers: [],
   providers: [],
