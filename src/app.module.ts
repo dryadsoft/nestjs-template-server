@@ -6,6 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TestModule } from './test/test.module';
 import { Test } from './test/entities/test.entity';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { Test } from './test/entities/test.entity';
       autoSchemaFile: true,
     }),
     TestModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
