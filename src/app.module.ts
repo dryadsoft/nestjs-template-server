@@ -48,6 +48,7 @@ import { UsersService } from './users/users.service';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
+      context: ({ req }) => ({ user: req['user'] }),
     }),
     TestModule,
     UsersModule,
