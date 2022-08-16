@@ -16,6 +16,7 @@ import { User } from './users/entities/user.entity';
 import { CommonModule } from './common/common.module';
 import { JwtModule } from './jwt/jwt.module';
 import { JwtMiddleware } from './jwt/jwt.middleware';
+import { UsersService } from './users/users.service';
 
 @Module({
   imports: [
