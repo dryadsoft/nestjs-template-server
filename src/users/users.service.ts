@@ -10,11 +10,14 @@ import { User } from './entities/user.entity';
 import { JwtService } from 'src/jwt/jwt.service';
 import { UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileinput, EditProfileOutput } from './dtos/edit-profile.dto';
+import { Verification } from './entities/verification.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly users: Repository<User>,
+    @InjectRepository(Verification)
+    private readonly verification: Repository<Verification>,
     private readonly jwtService: JwtService,
   ) {}
   getAll(): Promise<User[]> {
@@ -33,12 +36,14 @@ export class UsersService {
           error: '사용자 이메일이 이미 존재합니다. 계정을 생성할 수 없습니다.',
         };
       }
-      const newUser = this.users.create({
-        email,
-        password,
-        role,
-      });
-      await this.users.save(newUser);
+      const newUser = await this.users.save(
+        this.users.create({
+          email,
+          password,
+          role,
+        }),
+      );
+      await this.verification.save(this.verification.create({ user: newUser }));
       return {
         ok: true,
       };
@@ -109,6 +114,8 @@ export class UsersService {
       console.log(user);
       if (email) {
         user.email = email;
+        user.verified = false;
+        await this.verification.save(this.verification.create({ user }));
       }
       if (password) {
         user.password = password;
