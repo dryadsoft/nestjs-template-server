@@ -52,7 +52,10 @@ export class UsersService {
 
   async login({ email, password }: LoginInput): Promise<LoginOutput> {
     try {
-      const user = await this.users.findOne({ where: { email } });
+      const user = await this.users.findOne({
+        where: { email },
+        select: ['id', 'password'],
+      });
       if (!user) {
         return {
           ok: false,
@@ -103,6 +106,7 @@ export class UsersService {
   ): Promise<EditProfileOutput> {
     try {
       const user = await this.users.findOne({ where: { id: userId } });
+      console.log(user);
       if (email) {
         user.email = email;
       }
