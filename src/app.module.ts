@@ -19,6 +19,7 @@ import { JwtMiddleware } from './jwt/jwt.middleware';
 import { UsersService } from './users/users.service';
 import { AuthModule } from './auth/auth.module';
 import { Verification } from './users/entities/verification.entity';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -59,6 +60,7 @@ import { Verification } from './users/entities/verification.entity';
       privateKey: process.env.PRIVATE_KEY,
     }),
     AuthModule,
+    MailModule,
   ],
   controllers: [],
   providers: [],
