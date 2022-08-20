@@ -12,6 +12,7 @@ import { UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileinput, EditProfileOutput } from './dtos/edit-profile.dto';
 import { Verification } from './entities/verification.entity';
 import { VerifyEmailOutput } from './dtos/verify-email.dto';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class UsersService {
@@ -20,6 +21,7 @@ export class UsersService {
     @InjectRepository(Verification)
     private readonly verification: Repository<Verification>,
     private readonly jwtService: JwtService,
+    private readonly mailService: MailService,
   ) {}
   getAll(): Promise<User[]> {
     return this.users.find();
@@ -44,7 +46,10 @@ export class UsersService {
           role,
         }),
       );
-      await this.verification.save(this.verification.create({ user: newUser }));
+      const verification = await this.verification.save(
+        this.verification.create({ user: newUser }),
+      );
+      this.mailService.sendVerificationEmail(email, verification.code);
       return {
         ok: true,
       };
@@ -116,7 +121,10 @@ export class UsersService {
       if (email) {
         user.email = email;
         user.verified = false;
-        await this.verification.save(this.verification.create({ user }));
+        const verification = await this.verification.save(
+          this.verification.create({ user }),
+        );
+        this.mailService.sendVerificationEmail(email, verification.code);
       }
       if (password) {
         user.password = password;
@@ -143,6 +151,7 @@ export class UsersService {
       if (verification) {
         verification.user.verified = true;
         this.users.save(verification.user);
+        this.verification.delete(verification.id);
         // console.log(verification, verification.user);
       }
       return {

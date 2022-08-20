@@ -36,15 +36,14 @@ export class MailService {
           },
           body: form,
         },
-      ).json();
-      console.log(result);
+      );
     } catch (err) {
       console.log(err);
     }
   }
 
   sendVerificationEmail(email: string, code: string) {
-    this.sendMail('Verify Your Email', 'nuber-eat', [
+    this.sendMail('Verify Your Email', 'nuber-eats', [
       {
         key: 'code',
         value: code,
