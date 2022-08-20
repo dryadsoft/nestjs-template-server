@@ -7,8 +7,9 @@ import {
 import { IsEmail, IsEnum, IsString } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 import { CoreEntity } from 'src/common/entities/core.entity';
-import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany } from 'typeorm';
 import { InternalServerErrorException } from '@nestjs/common';
+import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
 
 enum UserRole {
   System,
@@ -38,6 +39,12 @@ export class User extends CoreEntity {
   @Column({ default: false })
   @Field((type) => Boolean)
   verified: boolean;
+
+  @OneToMany((type) => Restaurant, (restaurant) => restaurant.user, {
+    nullable: true,
+  })
+  @Field((type) => [Restaurant], { nullable: true })
+  restaurants?: Restaurant[];
 
   @BeforeInsert()
   @BeforeUpdate()

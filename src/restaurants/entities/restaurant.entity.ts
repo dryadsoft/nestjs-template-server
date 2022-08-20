@@ -1,5 +1,6 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { CoreEntity } from 'src/common/entities/core.entity';
+import { User } from 'src/users/entities/user.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { Category } from './category.entity';
 
@@ -24,5 +25,9 @@ export class Restaurant extends CoreEntity {
     onDelete: 'SET NULL',
   })
   @Field((type) => Category, { nullable: true })
-  category: Category;
+  category?: Category;
+
+  @ManyToOne((type) => User, (user) => user.restaurants)
+  @Field((type) => User)
+  user: User;
 }
