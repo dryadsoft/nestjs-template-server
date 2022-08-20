@@ -34,7 +34,7 @@
     "class-validator": "^0.13.2",
     "cross-env": "^7.0.3",
     "form-data": "^4.0.0",
-    "got": "^12.3.1",
+    "got": "^11.8.3",
     "graphql": "^16.5.0",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
