@@ -42,4 +42,17 @@ export class MailService {
       console.log(err);
     }
   }
+
+  sendVerificationEmail(email: string, code: string) {
+    this.sendMail('Verify Your Email', 'nuber-eat', [
+      {
+        key: 'code',
+        value: code,
+      },
+      {
+        key: 'username',
+        value: email,
+      },
+    ]);
+  }
 }
