@@ -1,10 +1,10 @@
 {
   "canvas": {
     "version": "2.2.11",
-    "width": 2000,
-    "height": 2000,
-    "scrollTop": -826.5,
-    "scrollLeft": -383,
+    "width": 3000,
+    "height": 3000,
+    "scrollTop": -559.5,
+    "scrollLeft": -352,
     "zoomLevel": 1,
     "show": {
       "tableComment": true,
@@ -72,7 +72,7 @@
             "id": "1ffaaca2-3cc6-4067-862c-35ee0f064ffb"
           },
           {
-            "name": "crateAt",
+            "name": "createAt",
             "comment": "",
             "dataType": "DATETIME",
             "default": "current_timestamp(6)",
@@ -212,9 +212,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 622.6926,
-          "top": 774.8897,
-          "zIndex": 185,
+          "left": 577.1372,
+          "top": 760.4458,
+          "zIndex": 229,
           "widthName": 60,
           "widthComment": 60
         },
@@ -249,7 +249,7 @@
             "id": "09cc3cf3-fe67-42ab-b8fd-9c945f431572"
           },
           {
-            "name": "crateAt",
+            "name": "createAt",
             "comment": "",
             "dataType": "DATETIME",
             "default": "current_timestamp(6)",
@@ -299,7 +299,7 @@
           "active": false,
           "left": 619.3439,
           "top": 587.6016,
-          "zIndex": 156,
+          "zIndex": 230,
           "widthName": 60,
           "widthComment": 60
         },
@@ -334,7 +334,7 @@
             "id": "d4a08d7f-ab31-4410-910a-61b577943663"
           },
           {
-            "name": "crateAt",
+            "name": "createAt",
             "comment": "",
             "dataType": "DATETIME",
             "default": "current_timestamp(6)",
@@ -453,7 +453,7 @@
           "active": false,
           "left": 1132.3673,
           "top": 785.8746,
-          "zIndex": 161,
+          "zIndex": 214,
           "widthName": 62.891876220703125,
           "widthComment": 60
         },
@@ -488,7 +488,7 @@
             "id": "bf82aba8-3dc8-4c56-ab4d-e8213c0ec300"
           },
           {
-            "name": "crateAt",
+            "name": "createAt",
             "comment": "",
             "dataType": "DATETIME",
             "default": "current_timestamp(6)",
@@ -634,7 +634,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": true
+              "notNull": false
             },
             "ui": {
               "active": false,
@@ -653,7 +653,7 @@
           "active": false,
           "left": 570,
           "top": 1043.5,
-          "zIndex": 201,
+          "zIndex": 223,
           "widthName": 60,
           "widthComment": 60
         },
@@ -688,7 +688,7 @@
             "id": "8de7dd44-bae4-48e5-bb28-b8db9e1c60da"
           },
           {
-            "name": "crateAt",
+            "name": "createAt",
             "comment": "",
             "dataType": "DATETIME",
             "default": "current_timestamp(6)",
@@ -784,7 +784,7 @@
           "active": false,
           "left": 1169,
           "top": 1066.5,
-          "zIndex": 199,
+          "zIndex": 219,
           "widthName": 60,
           "widthComment": 60
         },
@@ -808,8 +808,8 @@
           "columnIds": [
             "1ffaaca2-3cc6-4067-862c-35ee0f064ffb"
           ],
-          "x": 1029.3034245849608,
-          "y": 881.1397,
+          "x": 983.748024584961,
+          "y": 866.6958,
           "direction": "right"
         },
         "end": {
@@ -828,7 +828,7 @@
       {
         "identification": false,
         "relationshipType": "OneN",
-        "startRelationshipType": "Dash",
+        "startRelationshipType": "Ring",
         "start": {
           "tableId": "cf99e3e4-bfcd-45f0-b428-501dcda6ea9c",
           "columnIds": [
