@@ -17,7 +17,7 @@ enum UserRole {
   Client,
 }
 registerEnumType(UserRole, { name: 'UserRole' });
-@InputType({ isAbstract: true })
+@InputType('UserInputType', { isAbstract: true })
 @ObjectType()
 @Entity()
 export class User extends CoreEntity {
@@ -40,7 +40,7 @@ export class User extends CoreEntity {
   @Field((type) => Boolean)
   verified: boolean;
 
-  @OneToMany((type) => Restaurant, (restaurant) => restaurant.user, {
+  @OneToMany((type) => Restaurant, (restaurant) => restaurant.owner, {
     nullable: true,
   })
   @Field((type) => [Restaurant], { nullable: true })
