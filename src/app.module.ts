@@ -23,6 +23,8 @@ import { MailModule } from './mail/mail.module';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 import { Restaurant } from './restaurants/entities/restaurant.entity';
 import { Category } from './restaurants/entities/category.entity';
+import { TypeOrmExModule } from './database/typeorm-ex.module';
+import { CategoryRepository } from './restaurants/repositories/category.repository';
 
 @Module({
   imports: [
@@ -54,6 +56,7 @@ import { Category } from './restaurants/entities/category.entity';
       logging: process.env.NODE_ENV !== 'prod',
       entities: [Test, User, Verification, Restaurant, Category],
     }),
+    TypeOrmExModule.forCustomRepository([CategoryRepository]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,

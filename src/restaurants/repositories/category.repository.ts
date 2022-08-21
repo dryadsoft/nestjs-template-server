@@ -1,7 +1,8 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { CustomRepository } from 'src/database/typeorm-ex.decorator';
+import { Repository } from 'typeorm';
 import { Category } from '../entities/category.entity';
 
-@EntityRepository(Category)
+@CustomRepository(Category)
 export class CategoryRepository extends Repository<Category> {
   async getOrCreate(name: string): Promise<Category> {
     const categoryName = name.trim().toLowerCase();

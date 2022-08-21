@@ -65,10 +65,24 @@ export class RestaurantsService {
           error: '본인소유의 레스트랑만 수정할 수 있습니다.',
         };
       }
+      let category: Category;
+      if (editRestaurantInput.categoryName) {
+        category = await this.categories.getOrCreate(
+          editRestaurantInput.categoryName,
+        );
+      }
+      await this.restaurants.save([
+        {
+          id: editRestaurantInput.restaurantId,
+          ...editRestaurantInput,
+          ...(category && { category }),
+        },
+      ]);
       return {
         ok: true,
       };
     } catch (err) {
+      console.log(err);
       return {
         ok: false,
         error: '업데이트 실패',
