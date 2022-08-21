@@ -10,14 +10,14 @@ import {
 import { EditRestaurantInput } from './dtos/edit-restaurant.dto';
 import { Category } from './entities/category.entity';
 import { Restaurant } from './entities/restaurant.entity';
+import { CategoryRepository } from './repositories/category.repository';
 
 @Injectable()
 export class RestaurantsService {
   constructor(
     @InjectRepository(Restaurant)
     private readonly restaurants: Repository<Restaurant>,
-    @InjectRepository(Category)
-    private readonly categories: Repository<Category>,
+    private readonly categories: CategoryRepository,
   ) {}
 
   async createRestaurant(
@@ -27,18 +27,9 @@ export class RestaurantsService {
     try {
       const newRestaurant = this.restaurants.create(createRestaurantInput);
       newRestaurant.owner = owner;
-      const categoryName = createRestaurantInput.categoryName
-        .trim()
-        .toLowerCase();
-      const categorySlug = categoryName.replace(/ /g, '');
-      let category = await this.categories.findOne({
-        where: { slug: categorySlug },
-      });
-      if (!category) {
-        category = await this.categories.save(
-          this.categories.create({ name: categoryName, slug: categorySlug }),
-        );
-      }
+      const category = await this.categories.getOrCreate(
+        createRestaurantInput.categoryName,
+      );
       newRestaurant.category = category;
       await this.restaurants.save(newRestaurant);
       return {
@@ -57,7 +48,23 @@ export class RestaurantsService {
     editRestaurantInput: EditRestaurantInput,
   ): Promise<EditProfileOutput> {
     try {
-      // this.restaurants.save()
+      const restaurant = await this.restaurants.findOne({
+        where: { id: editRestaurantInput.restaurantId },
+        loadRelationIds: true,
+      });
+      if (!restaurant) {
+        return {
+          ok: false,
+          error: 'Restaurant not found!',
+        };
+      }
+
+      if (owner.id !== restaurant.ownerId) {
+        return {
+          ok: false,
+          error: '본인소유의 레스트랑만 수정할 수 있습니다.',
+        };
+      }
       return {
         ok: true,
       };
