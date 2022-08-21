@@ -1,5 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthUser } from 'src/auth/auth-user.decorator';
+import { Role } from 'src/auth/role.decorator';
 import { CreateAccountInput } from 'src/users/dtos/create-account.dto';
 import { User } from 'src/users/entities/user.entity';
 import {
@@ -13,11 +14,13 @@ import { RestaurantsService } from './restaurants.service';
 export class RestaurantsResolver {
   constructor(private readonly restaurantsService: RestaurantsService) {}
   @Query((returns) => Boolean)
+  @Role(['Owner'])
   category(): boolean {
     return true;
   }
 
   @Mutation((returns) => CreateRestaurantOutput)
+  @Role(['Owner'])
   createRestaurant(
     @AuthUser() owner: User,
     @Args('input') createRestaurantInput: CreateRestaurantInput,
