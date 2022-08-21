@@ -56,7 +56,6 @@ import { CategoryRepository } from './restaurants/repositories/category.reposito
       logging: process.env.NODE_ENV !== 'prod',
       entities: [Test, User, Verification, Restaurant, Category],
     }),
-    TypeOrmExModule.forCustomRepository([CategoryRepository]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
