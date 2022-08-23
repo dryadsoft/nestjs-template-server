@@ -43,13 +43,14 @@ export class CategoryService {
         take: 25,
         skip: (page - 1) * 25,
       });
-      category.restaurants = restaurants;
+      // category.restaurants = restaurants;
       const totalPages = await this.restaurantsService.countRestaurant(
         category,
       );
       return {
         ok: true,
         category,
+        restaurants,
         totalPages: Math.ceil(totalPages / 25),
       };
     } catch (err) {
