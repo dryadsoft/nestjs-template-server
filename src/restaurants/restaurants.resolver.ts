@@ -17,6 +17,10 @@ import {
 } from './dtos/edit-restaurant.dto';
 import { RestaurantInput, RestaurantOutput } from './dtos/restaurant.dto';
 import { RestaurantsInput, RestaurantsOutput } from './dtos/restaurants.dto';
+import {
+  SearchRestaruantsOutput,
+  SearchRestaurantsInput,
+} from './dtos/search-restaurants.dto';
 import { Restaurant } from './entities/restaurant.entity';
 import { RestaurantsService } from './restaurants.service';
 
@@ -74,5 +78,14 @@ export class RestaurantsResolver {
     @Args('input') restaurantInput: RestaurantInput,
   ): Promise<RestaurantOutput> {
     return this.restaurantsService.findRestaruantById(restaurantInput);
+  }
+
+  @Query((returns) => SearchRestaruantsOutput)
+  searchRestaurant(
+    @Args('input') searchRestaurantsInput: SearchRestaurantsInput,
+  ): Promise<SearchRestaruantsOutput> {
+    return this.restaurantsService.searchRestaurantsByName(
+      searchRestaurantsInput,
+    );
   }
 }
