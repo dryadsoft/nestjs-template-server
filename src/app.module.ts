@@ -16,15 +16,13 @@ import { User } from './users/entities/user.entity';
 import { CommonModule } from './common/common.module';
 import { JwtModule } from './jwt/jwt.module';
 import { JwtMiddleware } from './jwt/jwt.middleware';
-import { UsersService } from './users/users.service';
 import { AuthModule } from './auth/auth.module';
 import { Verification } from './users/entities/verification.entity';
 import { MailModule } from './mail/mail.module';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 import { Restaurant } from './restaurants/entities/restaurant.entity';
 import { Category } from './restaurants/entities/category.entity';
-import { TypeOrmExModule } from './database/typeorm-ex.module';
-import { CategoryRepository } from './restaurants/repositories/category.repository';
+import { Dish } from './restaurants/entities/dish.entity';
 
 @Module({
   imports: [
@@ -54,7 +52,7 @@ import { CategoryRepository } from './restaurants/repositories/category.reposito
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: process.env.NODE_ENV !== 'prod',
-      entities: [Test, User, Verification, Restaurant, Category],
+      entities: [Test, User, Verification, Restaurant, Category, Dish],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
