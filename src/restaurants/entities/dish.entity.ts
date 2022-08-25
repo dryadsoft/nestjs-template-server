@@ -10,8 +10,8 @@ export class DishOption {
   @Field((type) => String)
   name: string;
 
-  @Field((type) => [String])
-  choice: string[];
+  @Field((type) => [String], { nullable: true })
+  choice?: string[];
 
   @Field((type) => Int)
   extra: number;
@@ -30,8 +30,8 @@ export class Dish extends CoreEntity {
   @IsNumber()
   price: number;
 
-  @Field((type) => String)
-  @Column()
+  @Field((type) => String, { nullable: true })
+  @Column({ nullable: true })
   @IsString()
   photo: string;
 
@@ -50,7 +50,7 @@ export class Dish extends CoreEntity {
   @RelationId((dish: Dish) => dish.restaurant)
   restaurantId: number;
 
-  @Field((type) => [DishOption])
-  @Column({ type: 'json' })
-  options: DishOption[];
+  @Field((type) => [DishOption], { nullable: true })
+  @Column({ type: 'json', nullable: true })
+  options?: DishOption[];
 }
