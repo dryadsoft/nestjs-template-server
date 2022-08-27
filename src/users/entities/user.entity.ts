@@ -10,6 +10,7 @@ import { CoreEntity } from 'src/common/entities/core.entity';
 import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany } from 'typeorm';
 import { InternalServerErrorException } from '@nestjs/common';
 import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
+import { Order } from 'src/orders/entities/order.entity';
 
 export enum UserRole {
   Client = 'Client',
@@ -45,6 +46,14 @@ export class User extends CoreEntity {
   })
   @Field((type) => [Restaurant], { nullable: true })
   restaurants?: Restaurant[];
+
+  @OneToMany((type) => Order, (order) => order.customer, { nullable: true })
+  @Field((type) => [Order], { nullable: true })
+  orders?: Order;
+
+  @OneToMany((type) => Order, (order) => order.driver, { nullable: true })
+  @Field((type) => [Order], { nullable: true })
+  rider?: Order[];
 
   @BeforeInsert()
   @BeforeUpdate()
