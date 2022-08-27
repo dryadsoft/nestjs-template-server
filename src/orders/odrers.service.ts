@@ -29,6 +29,12 @@ export class OrderService {
         };
       }
 
+      this.orders.save(
+        this.orders.create({
+          customer,
+          restaurant,
+        }),
+      );
       return {
         ok: true,
       };
